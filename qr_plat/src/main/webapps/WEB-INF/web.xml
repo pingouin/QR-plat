@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+	<display-name>qr_plat</display-name>
+  	<description></description>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - Supernatural Separator - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <context-param>
+        <param-name>locale.language</param-name>
+        <param-value>zh</param-value>
+    </context-param>
+    <context-param>
+        <param-name>locale.country</param-name>
+        <param-value>CN</param-value>
+    </context-param>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - Supernatural Separator - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <session-config>
+        <!-- 10080 minutes ; 168 hours ; 7 days -->
+        <session-timeout>10080</session-timeout>
+    </session-config>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - Supernatural Separator - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<welcome-file-list>
+		<welcome-file>qrcode_generate_service.jsp</welcome-file>
+	</welcome-file-list>
+	  
+	  <servlet>
+	      <servlet-name>EncodeRequestUrlServlet</servlet-name>
+	      <servlet-class>cn.com.pingouin.qr_plat.server.servlets.EncodeRequestServlet</servlet-class>
+	      
+	      <init-param>
+	          <param-name>encodeWidth</param-name>
+	          <param-value>300</param-value>
+	      </init-param>
+	      <init-param>
+	          <param-name>encodeHeight</param-name>
+	          <param-value>300</param-value>
+	      </init-param>
+	  </servlet>
+	  
+	  <servlet>
+	      <servlet-name>upload</servlet-name>
+	      <servlet-class>cn.com.pingouin.qr_plat.server.servlets.PicUploaderServlet</servlet-class>
+	  </servlet>
+	  
+	  <servlet-mapping>
+	      <servlet-name>EncodeRequestUrlServlet</servlet-name>
+	      <url-pattern>/generateQRCode.do</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	      <servlet-name>upload</servlet-name>
+	      <url-pattern>/upload.do</url-pattern>
+	  </servlet-mapping>
+	  
+	  <distributable/>
+</web-app>
